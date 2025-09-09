@@ -402,51 +402,86 @@
             transform: translateY(-3px);
         }
         
+        /* تحسينات الأزرار */
+        .btn {
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover i {
+            transform: translateX(-5px);
+        }
+        
         .btn-primary {
             background: var(--gradient);
             border: none;
             padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
         }
         
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 51, 102, 0.3);
         }
         
         .btn-outline-primary {
             color: var(--primary);
-            border-color: var(--primary);
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            background: transparent;
+            padding: 10px 28px;
         }
         
         .btn-outline-primary:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 51, 102, 0.3);
         }
         
         .btn-light {
             background: white;
             color: var(--primary);
+            border: none;
             padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
         }
         
         .btn-light:hover {
             background: rgba(255, 255, 255, 0.9);
             color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-outline-light {
+            color: white;
+            border: 2px solid white;
+            background: transparent;
+            padding: 10px 28px;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* تحسينات للأزرار في بطاقات التسعير */
+        .pricing-card .btn {
+            width: 100%;
+            margin-top: 15px;
         }
         
         /* Animations */
@@ -457,6 +492,29 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* تأثيرات للعناصر عند التمرير */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* تأثيرات النبض للعناصر المهمة */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
         }
         
         /* Responsive adjustments */
@@ -472,6 +530,11 @@
             
             .section-title {
                 font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -503,11 +566,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">اتصل بنا</a>
                     </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-outline-light" href="#">تسجيل الدخول</a>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-light btn-sm" href="#">تسجيل الدخول</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-light ms-lg-2" href="#">تجربة مجانية</a>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-light btn-sm pulse-animation" href="#">تجربة مجانية</a>
                     </li>
                 </ul>
             </div>
@@ -525,7 +588,7 @@
                     <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">حوّل طريقة إدارة اشتراكات عملائك</h1>
                     <p class="lead mb-5 animate__animated animate__fadeInUp">RoaaLink يمنحك نظامًا متكاملًا لإدارة الاشتراكات، المدفوعات، والعملاء مع تحليلات متقدمة ولوحة تحكم بديهية تساعدك على تطوير عملك</p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap animate__animated animate__fadeInUp">
-                        <a href="#" class="btn btn-light btn-lg">ابدأ مجانًا <i class="bi bi-arrow-left ms-2"></i></a>
+                        <a href="#" class="btn btn-light btn-lg pulse-animation">ابدأ مجانًا <i class="bi bi-arrow-left ms-2"></i></a>
                         <a href="#features" class="btn btn-outline-light btn-lg">استكشف الميزات <i class="bi bi-search ms-2"></i></a>
                     </div>
                 </div>
@@ -534,7 +597,7 @@
     </section>
 
     <!-- قسم الشركاء -->
-    <section class="py-5">
+    <section class="py-5 animate-on-scroll">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mb-5">
@@ -575,8 +638,8 @@
             </div>
             
             <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="col-md-6 col-lg-4 animate-on-scroll">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-shield-lock"></i>
                         </div>
@@ -590,8 +653,8 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="col-md-6 col-lg-4 animate-on-scroll">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-credit-card"></i>
                         </div>
@@ -605,8 +668,8 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="col-md-6 col-lg-4 animate-on-scroll">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-graph-up"></i>
                         </div>
@@ -620,8 +683,8 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="col-md-6 col-lg-4 animate-on-scroll">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-people"></i>
                         </div>
@@ -635,8 +698,8 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="col-md-6 col-lg-4 animate-on-scroll">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-bell"></i>
                         </div>
@@ -650,8 +713,8 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card animate__animated animate__fadeInUp">
+                <div class="col-md-6 col-lg-4 animate-on-scroll">
+                    <div class="feature-card">
                         <div class="feature-icon">
                             <i class="bi bi-headset"></i>
                         </div>
@@ -666,12 +729,11 @@
                 </div>
             </div>
             
-            <div class="text-center mt-5">
+            <div class="text-center mt-5 animate-on-scroll">
                 <a href="#" class="btn btn-primary btn-lg">استكشف جميع الميزات <i class="bi bi-arrow-left ms-2"></i></a>
             </div>
         </div>
     </section>
-
 
     <!-- قسم التسعير -->
     <section id="pricing" class="pricing-section">
@@ -682,8 +744,8 @@
             </div>
             
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="pricing-card animate__animated animate__fadeInLeft">
+                <div class="col-lg-4 animate-on-scroll">
+                    <div class="pricing-card">
                         <div class="pricing-header">
                             <h3>الاساسية</h3>
                             <p>مناسبة للشركات الناشئة والصغيرة</p>
@@ -699,13 +761,13 @@
                                 <li><i class="bi bi-x-circle"></i> تقارير متقدمة</li>
                                 <li><i class="bi bi-x-circle"></i> دعم مخصص</li>
                             </ul>
-                            <a href="#" class="btn btn-outline-primary w-100">اختر هذه الخطة</a>
+                            <a href="#" class="btn btn-outline-primary">اختر هذه الخطة</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-4">
-                    <div class="pricing-card popular animate__animated animate__fadeInUp">
+                <div class="col-lg-4 animate-on-scroll">
+                    <div class="pricing-card popular">
                         <div class="pricing-header">
                             <h3>المهنية</h3>
                             <p>مناسبة للشركات المتوسطة</p>
@@ -721,13 +783,13 @@
                                 <li><i class="bi bi-check-circle-fill"></i> دعم عبر البريد</li>
                                 <li><i class="bi bi-x-circle"></i> دعم متعدد اللغات</li>
                             </ul>
-                            <a href="#" class="btn btn-primary w-100">اختر هذه الخطة</a>
+                            <a href="#" class="btn btn-primary pulse-animation">اختر هذه الخطة</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-4">
-                    <div class="pricing-card animate__animated animate__fadeInRight">
+                <div class="col-lg-4 animate-on-scroll">
+                    <div class="pricing-card">
                         <div class="pricing-header">
                             <h3>المؤسسة</h3>
                             <p>مناسبة للشركات الكبيرة</p>
@@ -743,14 +805,14 @@
                                 <li><i class="bi bi-check-circle-fill"></i> دعم مخصص 24/7</li>
                                 <li><i class="bi bi-check-circle-fill"></i> تكامل مخصص API</li>
                             </ul>
-                            <a href="#" class="btn btn-outline-primary w-100">اختر هذه الخطة</a>
+                            <a href="#" class="btn btn-outline-primary">اختر هذه الخطة</a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="text-center mt-5">
-                <p>هل تحتاج إلى خطة مخصصة؟ <a href="#contact" class="text-decoration-none">اتصل بنا</a></p>
+            <div class="text-center mt-5 animate-on-scroll">
+                <p>هل تحتاج إلى خطة مخصصة؟ <a href="#contact" class="text-decoration-none fw-bold">اتصل بنا</a></p>
             </div>
         </div>
     </section>
@@ -759,7 +821,7 @@
     <section id="dashboard" class="features-section bg-light">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6 animate-on-scroll">
                     <h2 class="fw-bold mb-4">لوحة تحكم قوية وسهلة الاستخدام</h2>
                     <p class="lead mb-4">تمتع بلوحة تحكم بديهية تمنحك نظرة شاملة على أداء أعمالك ومؤشرات الأداء الرئيسية في الوقت الفعلي.</p>
                     
@@ -797,21 +859,27 @@
                         <a href="#" class="btn btn-primary">جرب لوحة التحكم <i class="bi bi-arrow-left ms-2"></i></a>
                     </div>
                 </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="text-center">
+                        <div class="pulse-animation" style="display:inline-block;">
+                            <img src="https://via.placeholder.com/500x350/003366/ffffff?text=RoaaLink+Dashboard" alt="لوحة تحكم RoaaLink" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
 
     <!-- قسم CTA -->
     <section class="cta-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center cta-content">
-                    <h2 class="fw-bold mb-4">جاهز لتحويل إدارة اشتراكاتك؟</h2>
+                    <h2 class="fw-bold mb-4 animate__animated animate__pulse">جاهز لتحويل إدارة اشتراكاتك؟</h2>
                     <p class="lead mb-5">انضم إلى المئات من الشركات التي تستخدم RoaaLink لإدارة اشتراكات عملائها بكل كفاءة وأمان</p>
                     
                     <div class="d-flex justify-content-center flex-wrap gap-3">
-                        <a href="#contact" class="btn btn-light btn-lg">ابدأ تجربتك المجانية <i class="bi bi-arrow-left ms-2"></i></a>
+                        <a href="#contact" class="btn btn-light btn-lg pulse-animation">ابدأ تجربتك المجانية <i class="bi bi-arrow-left ms-2"></i></a>
                         <a href="#contact" class="btn btn-outline-light btn-lg">طلب استشارة <i class="bi bi-chat ms-2"></i></a>
                     </div>
                     
@@ -830,7 +898,7 @@
             </div>
             
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-8 animate-on-scroll">
                     <div class="card border-0 shadow">
                         <div class="card-body p-5">
                             <form>
@@ -840,7 +908,7 @@
                                         <input type="text" class="form-control" id="name" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                                        <label for="email" class="form-label">البريد الإlectronي</label>
                                         <input type="email" class="form-control" id="email" required>
                                     </div>
                                 </div>
@@ -853,14 +921,14 @@
                                     <textarea class="form-control" id="message" rows="5" required></textarea>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg">إرسال الرسالة</button>
+                                    <button type="submit" class="btn btn-primary btn-lg pulse-animation">إرسال الرسالة <i class="bi bi-send ms-2"></i></button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     
                     <div class="row mt-5">
-                        <div class="col-md-4 text-center mb-4">
+                        <div class="col-md-4 text-center mb-4 animate-on-scroll">
                             <div class="d-flex flex-column align-items-center">
                                 <i class="bi bi-envelope fs-1 text-primary mb-3"></i>
                                 <h4>البريد الإلكتروني</h4>
@@ -868,7 +936,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 text-center mb-4">
+                        <div class="col-md-4 text-center mb-4 animate-on-scroll">
                             <div class="d-flex flex-column align-items-center">
                                 <i class="bi bi-telephone fs-1 text-primary mb-3"></i>
                                 <h4>الهاتف</h4>
@@ -876,7 +944,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 text-center mb-4">
+                        <div class="col-md-4 text-center mb-4 animate-on-scroll">
                             <div class="d-flex flex-column align-items-center">
                                 <i class="bi bi-chat-dots fs-1 text-primary mb-3"></i>
                                 <h4>الدردشة المباشرة</h4>
@@ -893,7 +961,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-5">
+                <div class="col-lg-4 mb-5 animate-on-scroll">
                     <h4 class="mb-4"><i class="bi bi-link-45deg me-2"></i>RoaaLink</h4>
                     <p class="mb-4">نظام متكامل لإدارة الاشتراكات والعملاء مصمم لتبسيط عملياتك ومساعدة عملك على النمو.</p>
                     <div class="social-icons">
@@ -904,7 +972,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-5">
+                <div class="col-lg-2 col-md-4 mb-5 animate-on-scroll">
                     <h5 class="footer-links">المنتج</h5>
                     <ul>
                         <li><a href="#features">الميزات</a></li>
@@ -915,7 +983,7 @@
                     </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-5">
+                <div class="col-lg-2 col-md-4 mb-5 animate-on-scroll">
                     <h5 class="footer-links">الدعم</h5>
                     <ul>
                         <li><a href="#">الأسئلة الشائعة</a></li>
@@ -926,7 +994,7 @@
                     </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-5">
+                <div class="col-lg-2 col-md-4 mb-5 animate-on-scroll">
                     <h5 class="footer-links">الشركة</h5>
                     <ul>
                         <li><a href="#">عنّا</a></li>
@@ -937,7 +1005,7 @@
                     </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-6 animate-on-scroll">
                     <h5 class="footer-links">الأخبار</h5>
                     <p>اشترك في نشرتنا البريدية لتبقى على اطلاع بآخر التحديثات والميزات الجديدة.</p>
                     <div class="input-group mb-3">
@@ -994,14 +1062,16 @@
         
         // تشغيل العدادات عند التمرير إلى القسم
         const statsSection = document.querySelector('.stats-section');
-        window.addEventListener('scroll', function() {
-            const sectionPos = statsSection.getBoundingClientRect().top;
-            const screenPos = window.innerHeight / 1.3;
-            
-            if (sectionPos < screenPos) {
-                animateCounter();
-            }
-        });
+        if (statsSection) {
+            window.addEventListener('scroll', function() {
+                const sectionPos = statsSection.getBoundingClientRect().top;
+                const screenPos = window.innerHeight / 1.3;
+                
+                if (sectionPos < screenPos) {
+                    animateCounter();
+                }
+            });
+        }
         
         // إضافة تأثيرات للعناصر عند التمرير
         const animatedElements = document.querySelectorAll('.animate__animated');
@@ -1018,6 +1088,30 @@
         
         animatedElements.forEach(el => {
             observer.observe(el);
+        });
+        
+        // تأثيرات التمرير للعناصر المخصصة
+        const scrollElements = document.querySelectorAll('.animate-on-scroll');
+        
+        const elementObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        scrollElements.forEach(el => {
+            elementObserver.observe(el);
+        });
+        
+        // تأثيرات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.hero-badge').classList.add('animate__tada');
+            }, 1000);
         });
     </script>
 </body>
