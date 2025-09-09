@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoaaLink - نظام إدارة الاشتراكات المتكامل</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #0d3d6e;
+            --accent: #40668c;
+            --light: #f2f5f7;
+            --dark: #194775;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: rgba(0, 51, 102, 0.95);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        .nav-link {
+            position: relative;
+            margin: 0 10px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-section {
+            background: var(--gradient);
+            color: white;
+            padding: 120px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .features-section {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: var(--gradient);
+            transition: height 0.5s ease;
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+        
+        .pricing-section {
+            padding: 100px 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(242, 245, 247, 0.5)"/></svg>'), white;
+            background-size: cover;
+        }
+        
+        .pricing-card {
+            border: 1px solid #e6ebf0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            background: white;
+            position: relative;
+        }
+        
+        .pricing-card.popular {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            z-index: 1;
+        }
+        
+        .pricing-card.popular::before {
+            content: 'الأكثر شيوعاً';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .pricing-header {
+            background: var(--gradient);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .pricing-body {
+            padding: 30px;
+        }
+        
+        .price {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+        
+        .price-period {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list .bi-check-circle-fill {
+            color: #28a745;
+            margin-left: 10px;
+        }
+        
+        .feature-list .bi-x-circle {
+            color: #dc3545;
+            margin-left: 10px;
+        }
+        
+        .stats-section {
+            padding: 80px 0;
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .testimonials-section {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 15px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--light);
+            font-family: Arial;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        
+        .cta-section {
+            padding: 100px 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(0, 51, 102, 0.9)"/></svg>'), var(--gradient);
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-links h5 {
+            position: relative;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: white;
+            bottom: 0;
+            right: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-light:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Animations */
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0 80px;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+                margin: 30px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-link-45deg me-2"></i>RoaaLink
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">الصفحة الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">الميزات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">التسعير</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">لوحة التحكم</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">اتصل بنا</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-light" href="#">تسجيل الدخول</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light ms-lg-2" href="#">تجربة مجانية</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- قسم البطل -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="hero-badge animate__animated animate__fadeInDown">
+                        <i class="bi bi-star-fill me-2"></i>المنصة الأفضل لإدارة الاشتراكات في 2023
+                    </div>
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">حوّل طريقة إدارة اشتراكات عملائك</h1>
+                    <p class="lead mb-5 animate__animated animate__fadeInUp">RoaaLink يمنحك نظامًا متكاملًا لإدارة الاشتراكات، المدفوعات، والعملاء مع تحليلات متقدمة ولوحة تحكم بديهية تساعدك على تطوير عملك</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap animate__animated animate__fadeInUp">
+                        <a href="#" class="btn btn-light btn-lg">ابدأ مجانًا <i class="bi bi-arrow-left ms-2"></i></a>
+                        <a href="#features" class="btn btn-outline-light btn-lg">استكشف الميزات <i class="bi bi-search ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الشركاء -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <p class="text-muted">يوثقون بنا أكثر من 500 شركة ناشئة ورائدة</p>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4">
+                    <div class="bg-light p-3 rounded-3">
+                        <span class="fw-bold text-primary">Smartcat.sa</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4">
+                    <div class="bg-light p-3 rounded-3">
+                        <span class="fw-bold text-primary">FixerFm</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4">
+                    <div class="bg-light p-3 rounded-3">
+                        <span class="fw-bold text-primary">techtrum.net</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4">
+                    <div class="bg-light p-3 rounded-3">
+                        <span class="fw-bold text-primary">samaaka.com.sa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الميزات -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">ميزات نظام RoaaLink</h2>
+                <p class="lead text-muted">اكتشف مجموعة الميزات المتكاملة التي صممناها لتلبية جميع احتياجات إدارة الاشتراكات</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h4>أمان متكامل</h4>
+                        <p>نظام مصادقة متقدم مع صلاحيات محددة لكل دور في النظام، مع تشفير بيانات الدفع وفق أعلى معايير الأمان PCI DSS.</p>
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check-circle-fill"></i> مصادقة متعددة العوامل</li>
+                            <li><i class="bi bi-check-circle-fill"></i> إدارة الصلاحيات based on roles</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تسجيل كامل للأحداث والتحركات</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <h4>مدفوعات متعددة</h4>
+                        <p>دمج مع أشهر بوابات الدفع العالمية والمحلية (بطاقات ائتمان، PayPal، مدى، Apple Pay) مع دعم الفواتير والإشعارات.</p>
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check-circle-fill"></i> دفع متكرر آلي</li>
+                            <li><i class="bi bi-check-circle-fill"></i> فواتير قابلة للتخصيص</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تقارير مدفوعات مفصلة</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h4>تقارير وتحليلات</h4>
+                        <p>لوحة تحكم مع مؤشرات أداء رئيسية في الوقت الفعلي (المستخدمون النشطون، الإيرادات، معدل التغير) وتقارير قابلة للتصدير.</p>
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check-circle-fill"></i> لوحة تحكم قابلة للتخصيص</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تقارير مالية متقدمة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تحليلات تنبؤية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h4>إدارة العملاء</h4>
+                        <p>إدارة كاملة لملفات العملاء، تاريخ الاشتراكات، وتفاصيل الدفع مع إمكانية البحث المتقدم والتصفية.</p>
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check-circle-fill"></i> قاعدة بيانات عملاء مركزية</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تقسيم العملاء إلى شرائح</li>
+                            <li><i class="bi bi-check-circle-fill"></i> سجل تفاعلات كامل</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <h4>نظام الإشعارات</h4>
+                        <p>إشعارات تلقائية عبر البريد الإلكتروني والرسائل النصية لتجديد الاشتراكات، المدفوعات، والعروض الترويجية.</p>
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check-circle-fill"></i> قوالب إشعارات قابلة للتخصيص</li>
+                            <li><i class="bi bi-check-circle-fill"></i> إشعارات متعددة القنوات</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تقارير فتح الإشعارات</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h4>نظام التذاكر</h4>
+                        <p>نظام دعم متكامل يسمح للعملاء بإنشاء تذاكر الدعم ومتابعتها من قبل فريق الدعم مع إدارة الأولويات.</p>
+                        <ul class="feature-list">
+                            <li><i class="bi bi-check-circle-fill"></i> نظام تذاكر متكامل</li>
+                            <li><i class="bi bi-check-circle-fill"></i> إدارة أولويات المهام</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تقييم رضا العملاء</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary btn-lg">استكشف جميع الميزات <i class="bi bi-arrow-left ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- قسم التسعير -->
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">خطط الأسعار المناسبة لك</h2>
+                <p class="lead text-muted">اختر الخطة التي تناسب احتياجات عملك وقم بالترقية في أي وقت</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pricing-card animate__animated animate__fadeInLeft">
+                        <div class="pricing-header">
+                            <h3>الاساسية</h3>
+                            <p>مناسبة للشركات الناشئة والصغيرة</p>
+                        </div>
+                        <div class="pricing-body text-center">
+                            <div class="price">60<span class="price-period">/شهريًا</span>
+                            </div>
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill"></i> حتى 1000 عميل</li>
+                                <li><i class="bi bi-check-circle-fill"></i> إشعارات البريد الإلكتروني</li>
+                                <li><i class="bi bi-check-circle-fill"></i> تقارير أساسية</li>
+                                <li><i class="bi bi-x-circle"></i> دعم الرسائل النصية</li>
+                                <li><i class="bi bi-x-circle"></i> تقارير متقدمة</li>
+                                <li><i class="bi bi-x-circle"></i> دعم مخصص</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">اختر هذه الخطة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="pricing-card popular animate__animated animate__fadeInUp">
+                        <div class="pricing-header">
+                            <h3>المهنية</h3>
+                            <p>مناسبة للشركات المتوسطة</p>
+                        </div>
+                        <div class="pricing-body text-center">
+                            <div class="price">90<span class="price-period">/شهريًا</span></div>
+                            <p>أو 199 ريال سنوياً (توفير 20%)</p>
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill"></i> حتى 5000 عميل</li>
+                                <li><i class="bi bi-check-circle-fill"></i> إشعارات البريد الإلكتروني</li>
+                                <li><i class="bi bi-check-circle-fill"></i> تقارير متقدمة</li>
+                                <li><i class="bi bi-check-circle-fill"></i> دعم الرسائل النصية</li>
+                                <li><i class="bi bi-check-circle-fill"></i> دعم عبر البريد</li>
+                                <li><i class="bi bi-x-circle"></i> دعم متعدد اللغات</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100">اختر هذه الخطة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="pricing-card animate__animated animate__fadeInRight">
+                        <div class="pricing-header">
+                            <h3>المؤسسة</h3>
+                            <p>مناسبة للشركات الكبيرة</p>
+                        </div>
+                        <div class="pricing-body text-center">
+                            <div class="price">290<span class="price-period">/شهريًا</span></div>
+                            <p>أو 399 ريال سنوياً (توفير 20%)</p>
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill"></i> عملاء غير محدودين</li>
+                                <li><i class="bi bi-check-circle-fill"></i> جميع أنواع الإشعارات</li>
+                                <li><i class="bi bi-check-circle-fill"></i> تقارير متقدمة ومخصصة</li>
+                                <li><i class="bi bi-check-circle-fill"></i> دعم متعدد اللغات</li>
+                                <li><i class="bi bi-check-circle-fill"></i> دعم مخصص 24/7</li>
+                                <li><i class="bi bi-check-circle-fill"></i> تكامل مخصص API</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">اختر هذه الخطة</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p>هل تحتاج إلى خطة مخصصة؟ <a href="#contact" class="text-decoration-none">اتصل بنا</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم لوحة التحكم -->
+    <section id="dashboard" class="features-section bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">لوحة تحكم قوية وسهلة الاستخدام</h2>
+                    <p class="lead mb-4">تمتع بلوحة تحكم بديهية تمنحك نظرة شاملة على أداء أعمالك ومؤشرات الأداء الرئيسية في الوقت الفعلي.</p>
+                    
+                    <div class="d-flex mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-graph-up-arrow fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h4>تقارير مالية متقدمة</h4>
+                            <p>تابع إيراداتك، معدل التحويل، ومعدل التغير في الوقت الفعلي مع إمكانية مقارنة الأداء بفترات سابقة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-people fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h4>إدارة العملاء</h4>
+                            <p>ابحث عن العملاء، اطلع على تفاصيلهم، وادراشتراكاتهم بسهولة مع إمكانية التصفية المتقدمة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-card-checklist fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h4>المهام والإشعارات</h4>
+                            <p>ابق على اطلاع بآخر الأنشطة والعمليات التي تحتاج لانتباهك مع نظام تنبيهات ذكي.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-primary">جرب لوحة التحكم <i class="bi bi-arrow-left ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- قسم CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center cta-content">
+                    <h2 class="fw-bold mb-4">جاهز لتحويل إدارة اشتراكاتك؟</h2>
+                    <p class="lead mb-5">انضم إلى المئات من الشركات التي تستخدم RoaaLink لإدارة اشتراكات عملائها بكل كفاءة وأمان</p>
+                    
+                    <div class="d-flex justify-content-center flex-wrap gap-3">
+                        <a href="#contact" class="btn btn-light btn-lg">ابدأ تجربتك المجانية <i class="bi bi-arrow-left ms-2"></i></a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg">طلب استشارة <i class="bi bi-chat ms-2"></i></a>
+                    </div>
+                    
+                    <p class="mt-4">تجربة مجانية لمدة 14 يومًا بدون الحاجة إلى بطاقة ائتمان</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا -->
+    <section id="contact" class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">اتصل بنا</h2>
+                <p class="lead text-muted">فريق الدعم لدينا متاح للإجابة على جميع استفساراتك</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow">
+                        <div class="card-body p-5">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">الاسم الكامل</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">الموضوع</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">الرسالة</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">إرسال الرسالة</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="bi bi-envelope fs-1 text-primary mb-3"></i>
+                                <h4>البريد الإلكتروني</h4>
+                                <p>support@roaalink.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="bi bi-telephone fs-1 text-primary mb-3"></i>
+                                <h4>الهاتف</h4>
+                                <p>+966 12 345 6789</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="bi bi-chat-dots fs-1 text-primary mb-3"></i>
+                                <h4>الدردشة المباشرة</h4>
+                                <p>متاحة 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5">
+                    <h4 class="mb-4"><i class="bi bi-link-45deg me-2"></i>RoaaLink</h4>
+                    <p class="mb-4">نظام متكامل لإدارة الاشتراكات والعملاء مصمم لتبسيط عملياتك ومساعدة عملك على النمو.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-5">
+                    <h5 class="footer-links">المنتج</h5>
+                    <ul>
+                        <li><a href="#features">الميزات</a></li>
+                        <li><a href="#pricing">التسعير</a></li>
+                        <li><a href="#dashboard">لوحة التحكم</a></li>
+                        <li><a href="#">التكاملات</a></li>
+                        <li><a href="#">التحديثات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-5">
+                    <h5 class="footer-links">الدعم</h5>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">التوثيق</a></li>
+                        <li><a href="#">الفيديوات</a></li>
+                        <li><a href="#">المركز المساعد</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-5">
+                    <h5 class="footer-links">الشركة</h5>
+                    <ul>
+                        <li><a href="#">عنّا</a></li>
+                        <li><a href="#blog">المدونة</a></li>
+                        <li><a href="#">الوظائف</a></li>
+                        <li><a href="#">الشركاء</a></li>
+                        <li><a href="#">أخبار</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-links">الأخبار</h5>
+                    <p>اشترك في نشرتنا البريدية لتبقى على اطلاع بآخر التحديثات والميزات الجديدة.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="بريدك الإلكتروني">
+                        <button class="btn btn-light" type="button">اشترك</button>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-5 bg-light">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">© 2026 RoaaLink. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">شروط الخدمة</a>
+                    <a href="#" class="text-white text-decoration-none">سياسة الخصوصية</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // كود لجعل شريط التنقل يتغير عند التمرير
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 0';
+                navbar.style.backgroundColor = 'var(--primary)';
+            } else {
+                navbar.style.padding = '15px 0';
+                navbar.style.backgroundColor = 'rgba(0, 51, 102, 0.95)';
+            }
+        });
+        
+        // كود لتحريك العدادات في قسم الإحصائيات
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = Math.min(count + increment, target);
+                    setTimeout(() => animateCounter(counter), 1);
+                }
+            });
+        }
+        
+        // تشغيل العدادات عند التمرير إلى القسم
+        const statsSection = document.querySelector('.stats-section');
+        window.addEventListener('scroll', function() {
+            const sectionPos = statsSection.getBoundingClientRect().top;
+            const screenPos = window.innerHeight / 1.3;
+            
+            if (sectionPos < screenPos) {
+                animateCounter();
+            }
+        });
+        
+        // إضافة تأثيرات للعناصر عند التمرير
+        const animatedElements = document.querySelectorAll('.animate__animated');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__fadeIn');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
